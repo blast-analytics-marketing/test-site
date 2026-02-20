@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Appointments - AEP Adobe Tags Test</title>
+
+    <script>
+        window.adobeDataLayer = window.adobeDataLayer || [];
+        window.adobeDataLayer.push({
+            page: {
+                name: "AEP Adobe Tags Test Page",
+                section: "APPOINTMENTS",
+                server: window.location.hostname,
+                url: window.location.href
+            },
+            environment: { name: "dev" }
+        });
+    </script>
+
+    <!-- Adobe Tags (Launch) embed code -->
+    <script src="https://assets.adobedtm.com/6fdc3941716b/aa5b881ffda3/launch-851b9b0a51a5-development.min.js"></script>
+
+
+    <script>
+        // fire after Launch/ACDL have had a chance to initialize
+        window.addEventListener("load", function () {
+            window.adobeDataLayer.push({ event: "page_load", eventInfo: {} });
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <h1>Appointments</h1>
+    <p>Appointment events test page (Data Type = appointment, Variable Type = event).</p>
+
+    <div style="display:flex; flex-direction:column; gap:10px; max-width:520px;">
+        <button id="btnViewAppointment">View Appointment</button>
+
+        <button id="btnScheduleAppointmentClick">Schedule Appointment Click</button>
+        <button id="btnAppointmentSubmit">Appointment Submit</button>
+        <button id="btnAppointmentConfirmed">Appointment Confirmed</button>
+
+        <button id="btnRequestAppointment">Request an Appointment</button>
+
+        <button id="btnRescheduleAppointmentClick">Reschedule Appointment Click</button>
+        <button id="btnRescheduleAppointmentConfirmation">Reschedule Appointment Confirmation</button>
+
+        <button id="btnCancelAppointmentClick">Cancel Appointment Click</button>
+        <button id="btnCancelAppointmentConfirmation">Cancel Appointment Confirmation</button>
+
+        <hr />
+        <button id="backHomeBtn">Back to Home</button>
+    </div>
+
+    <script>
+        function pushAppointmentEvent(eventName, action, step, extra) {
+            window.adobeDataLayer = window.adobeDataLayer || [];
+            var payload = Object.assign({
+                event: eventName,
+                _bh: {
+                    appointment: {
+                        action: action,
+                        step: step
+                    }
+                }
+            }, extra || {});
+
+            window.adobeDataLayer.push(payload);
+            console.log(eventName + " pushed:", payload);
+        }
+
+        // viewAppointment -> action=view; step=view
+        document.getElementById("btnViewAppointment").addEventListener("click", function () {
+            pushAppointmentEvent("viewAppointment", "view", "view");
+        });
+
+        // scheduleAppointmentClick -> action=schedule; step=click
+        document.getElementById("btnScheduleAppointmentClick").addEventListener("click", function () {
+            pushAppointmentEvent("scheduleAppointmentClick", "schedule", "click");
+        });
+
+        // appointmentSubmit -> action=schedule; step=click
+        document.getElementById("btnAppointmentSubmit").addEventListener("click", function () {
+            pushAppointmentEvent("appointmentSubmit", "schedule", "click");
+        });
+
+        // appointmentConfirmed -> action=schedule; step=confirm
+        document.getElementById("btnAppointmentConfirmed").addEventListener("click", function () {
+            pushAppointmentEvent("appointmentConfirmed", "schedule", "confirm");
+        });
+
+        // requestAppointment -> action=request; step=click
+        document.getElementById("btnRequestAppointment").addEventListener("click", function () {
+            pushAppointmentEvent("requestAppointment", "request", "click");
+        });
+
+        // rescheduleAppointment -> action=reschedule; step=click
+        document.getElementById("btnRescheduleAppointmentClick").addEventListener("click", function () {
+            pushAppointmentEvent("rescheduleAppointment", "reschedule", "click");
+        });
+
+        // rescheduleAppointmentConfirmation -> action=reschedule; step=confirm
+        document.getElementById("btnRescheduleAppointmentConfirmation").addEventListener("click", function () {
+            pushAppointmentEvent("rescheduleAppointmentConfirmation", "reschedule", "confirm");
+        });
+
+        // cancelAppointment -> action=cancel; step=click
+        document.getElementById("btnCancelAppointmentClick").addEventListener("click", function () {
+            pushAppointmentEvent("cancelAppointment", "cancel", "click");
+        });
+
+        // cancelAppointmentConfirmation -> action=cancel; step=confirm
+        document.getElementById("btnCancelAppointmentConfirmation").addEventListener("click", function () {
+            pushAppointmentEvent("cancelAppointmentConfirmation", "cancel", "confirm");
+        });
+
+        // Back home
+        document.getElementById("backHomeBtn").addEventListener("click", function () {
+            window.location.href = "/index.html";
+        });
+    </script>
+
+</body>
+
+</html>

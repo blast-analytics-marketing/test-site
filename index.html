@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>AEP Adobe Tags Test Page</title>
+
+
+  <script>
+    window.adobeDataLayer = {
+      "page": {
+        "name": "AEP Adobe Tags Test Page",
+        "section": "HOME",
+        "server": window.location.hostname,
+        "url": window.location.href,
+        "apples": true
+      }
+    };
+    adobeDataLayer.environment = { name: "dev" };
+
+    console.log("Data layer loaded early:", adobeDataLayer);
+  </script>
+
+  <!-- Adobe Tags (Launch) embed code -->
+  <script src="https://assets.adobedtm.com/6fdc3941716b/aa5b881ffda3/launch-851b9b0a51a5-development.min.js"
+    async></script>
+</head>
+
+<body>
+
+  <h1>AEP Adobe Tags Test Page</h1>
+  <p>This page is used to validate Adobe Experience Platform implementations.</p>
+
+  <button id="testButton">Test Button Click</button>
+
+  <!-- go to appointments page (no data layer push) -->
+  <button id="appointmentsBtn">Go to Appointments</button>
+
+  <script>
+    document.getElementById("testButton").addEventListener("click", function (e) {
+      var el = e.currentTarget;
+
+      var linkText = el.innerText || el.getAttribute("aria-label") || "";
+
+      // Buttons don't have href; use a data attribute if you want to simulate a link
+      var linkUrl = el.getAttribute("data-href") || "";
+
+      // Determine linkType
+      var linkType = "other";
+
+      if (linkUrl) {
+        var isDownload = /\.(pdf|docx?|xlsx?|zip|csv)$/i.test(linkUrl);
+        var isExit = linkUrl.indexOf(window.location.hostname) === -1;
+
+        if (isDownload) {
+          linkType = "download";
+        } else if (isExit) {
+          linkType = "exit";
+        }
+      }
+
+      // Use the same reference consistently
+      adobeDataLayer.push({
+        event: "link_click",
+        eventInfo: {
+          linkText: linkText,
+          linkUrl: linkUrl,
+          linkType: linkType
+        }
+      });
+
+      console.log("link_click pushed:", {
+        linkText: linkText,
+        linkUrl: linkUrl,
+        linkType: linkType
+      });
+    });
+
+    document.getElementById("appointmentsBtn").addEventListener("click", function () {
+      window.location.href = "/appointments.html";
+    });
+  </script>
+</body>
+
+</html>

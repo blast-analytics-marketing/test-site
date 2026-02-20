@@ -5,18 +5,23 @@
     <meta charset="UTF-8" />
     <title>Appointments - AEP Adobe Tags Test</title>
 
-    <script>
-        window.adobeDataLayer = window.adobeDataLayer || [];
-        window.adobeDataLayer.push({
-            page: {
-                name: "AEP Adobe Tags Test Page",
-                section: "APPOINTMENTS",
-                server: window.location.hostname,
-                url: window.location.href
-            },
-            environment: { name: "dev" }
-        });
-    </script>
+  <script>
+    // First define the global variable for the entire data layer array
+    window.adobeDataLayer = [];
+    // Then push in the variables required in the Initial Data Layer Definition
+    window.adobeDataLayer.push({
+      page: {
+        url: window.location.href,
+        server: window.location.hostname,
+        name: window.document.title,
+        section: "APPOINTMENTS" // Set to first URL folder (e.g., 'careers' for https://www.bannerhealth.com/careers)
+      },
+      environment: {
+        name: "dev" // Expected values: dev | qa | prod
+      }
+    });
+  </script>
+ 
 
     <!-- Adobe Tags (Launch) embed code -->
     <script src="https://assets.adobedtm.com/6fdc3941716b/aa5b881ffda3/launch-851b9b0a51a5-development.min.js"></script>

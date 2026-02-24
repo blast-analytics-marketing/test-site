@@ -8,9 +8,9 @@
   <!-- Initial Data Layer Definition -->
   <script>
     // First define the global variable for the entire data layer array
-    window.adobeDataLayer = [];
+  var adobeDataLayer = adobeDataLayer || [];
     // Then push in the variables required in the Initial Data Layer Definition
-    window.adobeDataLayer.push({
+    adobeDataLayer.push({
       event: "page_load",
       page: {
         url: window.location.href,

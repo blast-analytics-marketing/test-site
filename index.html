@@ -65,22 +65,8 @@
         }
       }
 
-      // Use the same reference consistently
-      adobeDataLayer.push({
-        event: "link_click",
-        eventInfo: {
-          linkText: linkText,
-          linkUrl: linkUrl,
-          linkType: linkType
-        }
-      });
 
-      console.log("link_click pushed:", {
-        linkText: linkText,
-        linkUrl: linkUrl,
-        linkType: linkType
-      });
-    });
+
 
     document.getElementById("appointmentsBtn").addEventListener("click", function () {
       window.location.href = "/appointments.html";

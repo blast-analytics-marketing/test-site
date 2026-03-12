@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>404 - Page Not Found</title>
+
+  <!-- Adobe Client Data Layer -->
+  <script>
+    window.adobeDataLayer = window.adobeDataLayer || [];
+
+    window.adobeDataLayer.push({
+      event: "404_page",
+      page: {
+        name: "404_not_found",
+        section: "error",
+        url: window.location.href,
+        server: window.location.hostname
+      },
+      error: {
+        type: "404",
+        code: "not_found"
+      }
+    });
+  </script>
+
+  <!-- Adobe Tags (Launch) -->
+  <script src="https://assets.adobedtm.com/6fdc3941716b/aa5b881ffda3/launch-851b9b0a51a5-development.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+      background: #fafafa;
+    }
+
+    h1 {
+      font-size: 48px;
+      color: #c0392b;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 24px;
+    }
+
+    .home-link {
+      display: inline-block;
+      padding: 12px 20px;
+      background: #0072ce;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      margin-top: 16px;
+    }
+
+    .home-link:hover {
+      background: #005ea6;
+    }
+
+    .scroll-test {
+      margin-top: 80px;
+      height: 2000px;
+      background: linear-gradient(#ffffff, #e3f2fd);
+      padding-top: 40px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>404</h1>
+  <p>The page you are looking for cannot be found.</p>
+
+  <a class="home-link" href="/index.html">Return to Home</a>
+
+  <div class="scroll-test">
+    <p>Scroll down this page to test scroll tracking on error pages.</p>
+  </div>
+
+</body>
+
+</html>
